@@ -7,10 +7,10 @@ import type { Object3D } from 'three';
 export const PART_GROUP_NAME_SEPARATOR = ' - ';
 
 /**
- * Returns true for nodes that are standard 2020 aluminum extrusion parts.
+ * Returns true for nodes that are standard aluminum extrusion parts (2020, "Aluminum", "Extrusion").
  * These are hidden from the GLB render and replaced by a procedural box in the viewer.
  */
-const IS_2020_RE = /\b2020\b|aluminum[\s_]+extrusion/i;
+const IS_2020_RE = /\b2020\b|aluminum[\s_]+extrusion|\baluminum\b|\bextrusion\b/i;
 export function is2020NodeName(rawName: string): boolean {
   return IS_2020_RE.test(expandSanitizedNodeNameForGrouping(rawName));
 }
