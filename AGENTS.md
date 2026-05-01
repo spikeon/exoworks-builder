@@ -1,125 +1,94 @@
 # exoworks-builder – Agent & contributor context
 
-> **For AI agents:** Whenever you change the Onshape pull pipeline, the GLB optimization step, the `assembly-manifest.json` schema, or the viewer's interface-frame logic, **update this file in the same PR** so future agents stay aligned. Cross-link to the platform repos for product/catalog context — don't duplicate it here.
+> **For AI agents:** Whenever you change the viewer component's public API, the `assembly-manifest.json` schema, or the viewer's interface-frame logic, **update this file in the same PR** so future agents stay aligned. The Onshape pull pipeline has moved to each catalog repo — cross-link there.
 
-## ExoGuitar Character Creator (added 2026-04-28)
+## What this repo is now
 
-`App.tsx` was upgraded from a simple "show all models" viewer to a **character creator** UI:
-- Left sidebar: select from pre-pulled complete guitar configurations (Warlock, Arrow Head, CyberWings v2, Acoustic Core, Neck, ExoBass)
-- Right panel: React Three Fiber 3D viewer (`InterfaceAssemblyView`) showing the selected assembly
-- Part visibility toggles: per-part-group show/hide driven by `partVisibility` prop
+**`exoworks-builder` is a read-only R3F viewer library.** It knows nothing about catalogs, Onshape, or how models are sourced. You pass it GLB URLs and optional sidecar JSON — it renders.
 
-`onshape-sources.json` now contains all ExoGuitar assembly entries (Warlock, Arrow Head, CyberWings v2, Acoustic Core, Neck, Bearing Bridge, Arch Top Bridge). Run `npm run onshape:pull:all` to pull them.
+- **Onshape pull scripts** have been moved to each catalog repo (e.g. `../exoguitar/scripts/onshape-pull-*.mjs`).
+- **Catalog → Onshape correlation** is stored in each part's `meta.json` `onshapeSource` field.
+- The SPA (`../exoworks/`) consumes this package via `file:../exoworks-builder` and a Vite alias pointing at `src/index.ts`.
 
-`scripts/onshape-pull-manifest.mjs` was updated to support **assembly entries** (in addition to Part Studio entries). Assembly entries need `did`, `wvmid`, `eid`, and `elementKind: "assembly"` — the script builds a full document URL and passes `--composed` automatically. Part Studio entries (with `documentName` + `partStudioName`) work exactly as before.
+## Public API (`src/index.ts`)
 
-**Roadmap for true per-module swapping:** Currently, the character creator shows pre-assembled complete guitar GLBs. To enable true module swapping (pick any wing set + any neck + any bridge), each slot module needs `iface_*` mate connectors added in OnShape, then the mate-connector pull flow can be used. The `InterfaceAssemblyView` already supports this via `legacyIfaceAssembly: true` and `mateSidecar` sidecars.
+```ts
+import {
+  InterfaceAssemblyView,
+  type AssemblyModelInput,
+  type InterfaceAssemblyViewProps,
+  type PartCatalogFile,
+  type AssemblyManifest,
+  type MateConnectorsSidecar,
+  // … assembly grouping helpers
+} from 'exoworks-builder';
+```
 
-This is a **standalone Vite + React Three Fiber app** that:
+| Export | Description |
+|---|---|
+| `InterfaceAssemblyView` | R3F canvas component. Accepts `models: AssemblyModelInput[]`, optional `partVisibility`, `onPartCatalogChange`, `className`, `style`. |
+| `AssemblyModelInput` | `{ url, label?, mateSidecar?, assemblyManifest?, legacyIfaceAssembly? }` |
+| `InterfaceAssemblyViewProps` | Props for `InterfaceAssemblyView`. |
+| `PartCatalogFile` | Per-file part catalog summary emitted by `onPartCatalogChange`. |
+| `AssemblyManifest` | Shape of `*.assembly-manifest.json` sidecar. |
+| `MateConnectorsSidecar` | Shape of `*.mate-connectors.json` sidecar. |
+| Assembly grouping helpers | `collectPartGroupsForSceneRoot`, `PART_GROUP_NAME_SEPARATOR`, `groupNameFromPartNodeName`, etc. |
 
-1. Pulls **composed assemblies** and **interface frames** from **Onshape** via REST (`scripts/onshape-pull-part.mjs`, `scripts/onshape-pull-manifest.mjs`).
-2. Optimizes the resulting `.glb` for web (`scripts/gltf-web-optimize.mjs` — meshopt compression + texture removal + mesh simplification).
-3. Renders the assembly with **R3F** so designers can preview how parts will combine in-place.
-
-It is **not** the same thing as the SPA's part-page model viewer (that one is `online-3d-viewer` inside the **[exoworks](https://github.com/spikeon/exoworks)** repo). This app is a **separate** R3F preview + the source-of-truth for `.glb` artifacts that ship into `src/test-models/` here.
+**Do not import from `src/loadTestFolderModels.ts`** — that is internal to the dev app.
 
 ## Repo layout
 
 | Path | Purpose |
 |---|---|
-| `src/main.tsx`, `src/App.tsx`, `src/index.css` | Vite app entry + root view. |
-| `src/InterfaceAssemblyView.tsx` | R3F viewer that aligns multiple GLBs by their `iface_*` mate-connector frames. |
-| `src/loadTestFolderModels.ts` | Vite glob-imports `.glb`/`.gltf` + sidecars from `src/test-models/`. |
-| `src/interfaceFrames.ts` | Parses `*.mate-connectors.json` (`iface_*` named mate connectors → frames). |
-| `src/assemblyPartGroups.ts` | Parses `*.assembly-manifest.json` (composed assembly grouping + flags like `legacyIfaceAssembly`). |
-| `src/modelUrl.ts` | URL helpers for served test-model assets. |
-| `src/test-models/` | **Output target** for `npm run onshape:pull*`. Holds the `.glb`/`.gltf`, `.mate-connectors.json`, `.assembly-manifest.json` artifacts the viewer loads. Gitignored except `.gitkeep` and committed reference exports. |
-| `scripts/onshape-pull-part.mjs` | Pull a **single** Onshape document → glTF + sidecars. CLI entry point: `npm run onshape:pull -- …`. |
-| `scripts/onshape-pull-manifest.mjs` | Pull **everything** listed in `onshape-sources.json`. CLI entry point: `npm run onshape:pull:all`. |
-| `scripts/gltf-web-optimize.mjs` | Post-process `.glb`: remove textures, simplify mesh, apply `EXT_meshopt_compression`. Run automatically by `onshape-pull-part.mjs`. |
-| `onshape-sources.json` | Tracked manifest of Onshape sources (`did`, `wvm`, `wvmid`, `eid`, `elementKind`, `tabName`, `assemblyName`, `documentName`) keyed by output filename. Updated automatically by the pull scripts. |
-| `onshape-sources.example.json` | Schema reference (commit-safe template). |
-| `index.html`, `vite.config.ts`, `tsconfig.json` | Vite/TS config. |
-| `.cursor/skills/onshape-composed-assembly-export/` | Detailed pull-flow runbook (composed assemblies). Read this when wiring up a new Onshape source. |
-| `.cursor/skills/onshape-mate-connector-export/` | Pull-flow runbook for **multi-document** mate-connector alignment (`iface_*`). |
-| `.env`, `.env.example` | Local secrets — `ONSHAPE_ACCESS_KEY`, `ONSHAPE_SECRET_KEY`, optional `ONSHAPE_API_BASE_URL` (default `https://cad.onshape.com/api/v10`). |
+| `src/index.ts` | **Public API** — the only stable import surface. |
+| `src/InterfaceAssemblyView.tsx` | R3F viewer component. |
+| `src/interfaceFrames.ts` | `iface_*` mate-connector frame parsing + alignment. |
+| `src/assemblyPartGroups.ts` | Composed-assembly part grouping + manifest parsing. |
+| `src/modelUrl.ts` | URL helpers for GLB asset fetches. |
+| `src/App.tsx`, `src/main.tsx` | Dev app only — not part of the public API. |
+| `src/loadTestFolderModels.ts` | Dev app only — Vite glob-imports from `src/test-models/`. |
+| `src/test-models/` | Dev app demo data (`.glb` + sidecars). Gitignored. |
+| `vite.config.ts` | Plain Vite + React dev-app config. No catalog-scanning code. |
+| `.cursor/skills/` | Onshape pull-flow runbooks (still useful reference for the catalog scripts). |
 
-## Two pull flows
+## Consuming as a package (from `../exoworks/`)
 
-There are **two** different ways to pull from Onshape, and they emit different sidecars. Pick based on how the source document is structured.
+`exoworks/package.json` lists `"exoworks-builder": "file:../exoworks-builder"`.
+`exoworks/frontend/vite.config.ts` maps the package name to `src/index.ts` via a `resolve.alias`
+so Vite compiles the TypeScript source directly — no separate `npm run build` step needed.
 
-### 1. Composed assembly export (default for new sources)
-
-- **When**: One Part Studio (or one Assembly tab) where every part is **positioned** in place. Top-level instance/group names form the scene's direct children.
-- **What it produces**: `<name>.glb` + `<name>.assembly-manifest.json` (no `iface_*` mate sidecar).
-- **Command**:
-  ```
-  npm run onshape:pull -- "Doc Name" --studio="Tab Name" --composed --file="Output.glb"
-  npm run onshape:pull -- "https://cad.onshape.com/documents/DID/w/WID/e/EID" --composed --file="Output.glb"
-  ```
-- Default export path is **sync GET** (`…/gltf`) — reflects the Part Studio as displayed (visible vs hidden depends on the tab). Use `--composed-async` to allow the async POST `…/export/gltf` (visible-only via `excludeHiddenEntities=true`, returns ZIP that the script merges).
-- Read the full runbook in `.cursor/skills/onshape-composed-assembly-export/SKILL.md` before adding a new composed source.
-
-### 2. Mate-connector interface export (multi-document alignment)
-
-- **When**: Multiple Onshape documents that need to **snap together** at runtime via named mate connectors (`iface_*`).
-- **What it produces**: `<name>.glb` + `<name>.mate-connectors.json` (one entry per `iface_*` mate connector, with frame transforms).
-- **Default export path** is async POST `…/export/gltf` with `excludeHiddenEntities=true`. Falls back to sync GET if the async path fails for that document. Force sync GET only with `--sync`.
-- glTF tessellation (async only): `--gltf-quality=coarse` (default; smallest files, COARSE + relaxed tolerances), `medium`, or `fine`.
-- Read the full runbook in `.cursor/skills/onshape-mate-connector-export/SKILL.md`.
-
-### Output post-processing (always)
-
-`.glb` outputs from either flow are post-processed by `scripts/gltf-web-optimize.mjs`:
-- Textures removed.
-- Mesh simplified (meshoptimizer).
-- `EXT_meshopt_compression` applied.
-
-This keeps file sizes small for the viewer load and makes the artifacts safe to commit when the user wants a baseline reference export.
-
-## Viewer behavior
-
-- `App.tsx` glob-loads everything under `src/test-models/` via `loadTestFolderModels()` and renders them through `InterfaceAssemblyView`.
-- For each model entry, the viewer combines (in priority order):
-  - `assemblyManifest` (`*.assembly-manifest.json`) — composed-assembly grouping; flag `legacyIfaceAssembly: true` opts that file into the legacy iface frame alignment behavior.
-  - `mateSidecar` (`*.mate-connectors.json`) — `iface_*` mate frames.
-  - The `.glb` / `.gltf` itself.
-- Empty state when `src/test-models/` has no `.glb` / `.gltf` artifacts: shows a hint to add files there.
-- This is a **dev-only preview app** — `Dockerfile` exists but production hosting is out of scope here; see the SPA repo for the user-facing model viewer.
-
-## Local dev
+## Dev app (internal only)
 
 ```
 npm install
-cp .env.example .env   # add ONSHAPE_ACCESS_KEY + ONSHAPE_SECRET_KEY
-npm run onshape:pull -- "Doc Name" --composed --file="Doc Name.glb"
-npm run dev
+npm run dev   # Vite dev server on :5173; loads GLBs from src/test-models/
 ```
 
-`npm run dev` starts Vite (default port). `npm run build` / `npm run preview` for production bundle.
+Place `.glb` + optional `.assembly-manifest.json` / `.mate-connectors.json` sidecars in `src/test-models/` to preview them. See the catalog repos' `npm run onshape:pull:all` for how to generate those files from Onshape.
+
+## Sidecar schemas
+
+### `*.assembly-manifest.json`
+
+Written by `onshape-pull-part.mjs --composed` in each catalog's `scripts/`. `composedDocument: true`, `legacyIfaceAssembly: false` (default new-style). Optional `partVisibilityBuckets` preserved across re-exports.
+
+### `*.mate-connectors.json`
+
+Written by `onshape-pull-part.mjs` (no `--composed`) for multi-document `iface_*` connector alignment. `legacyIfaceAssembly: true` inside. Generally deprecated in favor of single composed assembly exports.
 
 ## Editing rules of thumb
 
-- **Don't** edit files under `src/test-models/` by hand — they are pull-script outputs. Re-run the pull script and let it overwrite + update `onshape-sources.json`.
-- **Do** commit the updated `onshape-sources.json` so other contributors can re-pull the same artifacts.
-- **Don't** commit `.env` (gitignored). Use `.env.example` for new variables.
-- When changing `assembly-manifest.json` or `mate-connectors.json` schema, update **both** the parser (`src/assemblyPartGroups.ts` / `src/interfaceFrames.ts`) **and** the writer in the relevant `scripts/onshape-pull-*.mjs` in the same change.
-- Pull scripts are Node ESM (`.mjs`); they use Onshape REST v10 with Basic auth. Stay on the `v10` API base unless a new endpoint requires bumping (and update both the script default and any `.env.example` notes).
-
-## What this repo is **not**
-
-- Not the SPA's part-page 3D viewer (that's `frontend/src/components/ModelViewer.tsx` in **[exoworks](https://github.com/spikeon/exoworks)**, using `online-3d-viewer`).
-- Not a catalog (no `models/`, no `BOM.txt`, no `meta.json` schema, no `partUid`).
-- Not part of the API or DB. Nothing here writes to `parts`, `materials`, etc.
-- Not deployed to App Platform. (No coordination with `start-api.js` post-deploy pipeline.)
+- **Never add catalog-specific logic** to this repo. It must remain a dumb viewer that accepts data and displays it.
+- When changing `assembly-manifest.json` or `mate-connectors.json` **schema**, update the **parser** (`src/assemblyPartGroups.ts` / `src/interfaceFrames.ts`) **and** the **writer** in the catalog script (`../exoguitar/scripts/onshape-pull-part.mjs`) in the same change.
+- **Do not re-add** `onshape-pull-*.mjs` or `gltf-web-optimize.mjs` here — those now live in each catalog repo.
+- The **public API surface** is `src/index.ts` only. Internal modules (`loadTestFolderModels.ts`, `App.tsx`) must not be imported by downstream consumers.
 
 ## Cross-repo links
 
-- SPA + scripts (the user-facing app this previews against): **`../exoworks/AGENTS.md`**.
-- API + DB + post-deploy: **`../exoworks-api/AGENTS.md`**.
-- Catalogs (where the printable part files live): **`../exoguitar/AGENTS.md`**, **`../exobass/AGENTS.md`**, **`../shared/AGENTS.md`**.
+- SPA that consumes this library: **`../exoworks/AGENTS.md`** (see `exoworks-dep` alias).
+- Catalog repos that hold Onshape pull scripts: **`../exoguitar/AGENTS.md`**, **`../exobass/AGENTS.md`**.
 - Multi-repo orientation: **`../AGENTS.md`** (workspace root).
 
 ---
 
-*Update this file in the same PR as any change to the Onshape pull pipeline, GLB optimization step, sidecar schemas, or the R3F viewer's alignment logic.*
+*Update this file in the same PR as any change to the public API surface, sidecar schemas, or the R3F viewer's alignment logic.*

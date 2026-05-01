@@ -30,7 +30,7 @@ Thumbs.db
 .vscode/
 *.code-workspace
 
-# Onshape pull outputs (regenerate with npm run onshape:pull*)
+# Onshape pull outputs (regenerate with npm run onshape:pull* in a catalog repo)
 src/test-models/**/*.glb
 src/test-models/**/*.gltf
 

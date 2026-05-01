@@ -33,8 +33,3 @@ export {
   type MateConnectorsSidecar,
   type PlacedModel,
 } from './interfaceFrames';
-export {
-  loadAllTestFolderModelUrls,
-  loadTestFolderModels,
-  type TestModelEntry,
-} from './loadTestFolderModels';
