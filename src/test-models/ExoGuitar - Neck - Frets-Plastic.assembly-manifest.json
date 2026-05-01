@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "composedDocument": true,
+  "legacyIfaceAssembly": false,
+  "sourceFile": "src/test-models/ExoGuitar - Neck - Frets-Plastic.glb",
+  "assemblyGltfGrouping": true,
+  "document": {
+    "did": "6fd3211936816a22a3e79f4f",
+    "wvm": "w",
+    "wvmid": "1dad46e562c86c42d02f804d",
+    "eid": "b92cfa3d6370cae67b958547",
+    "linkDocumentId": ""
+  },
+  "elementKind": "assembly",
+  "tabName": "Frets - Plastic",
+  "assemblyName": "Frets - Plastic",
+  "documentName": "ExoGuitar Assemblies",
+  "partGroupsNote": "Default: group by text before the first \" - \" in each scene child name (viewer expands Three.js _ in names). Optional partVisibilityBuckets overrides with substring rules. Re-export preserves partVisibilityBuckets if already present.",
+  "queriedAt": "2026-04-30T19:21:17Z",
+  "libraryVersion": 2945,
+  "sourceMicroversion": "674b125f970585bc583153b1",
+  "exportContentType": "application/octet-stream;charset=utf-8",
+  "excludeHiddenEntities": true,
+  "exportMethod": "asyncPOST_assembly_export_gltf",
+  "gltfMeshQuality": "coarse",
+  "meshParams": {
+    "angularTolerance": 0.06,
+    "distanceTolerance": 0.04,
+    "maximumChordLength": 0.2,
+    "resolution": "COARSE",
+    "unit": "METER"
+  },
+  "glbWebOptimize": {
+    "applied": true,
+    "inputBytes": 6490920,
+    "outputBytes": 1856908,
+    "simplifyRatio": 0.82,
+    "simplifyError": 0.01,
+    "simplifyLockBorder": true,
+    "meshoptLevel": "medium",
+    "extensionsUsed": [
+      "EXT_meshopt_compression"
+    ]
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "legacyIfaceAssembly": true,
+  "sourceFile": "src/test-models/ExoGuitar - Bridge - Arch Top.glb",
+  "document": {
+    "did": "6fd3211936816a22a3e79f4f",
+    "wvm": "w",
+    "wvmid": "1dad46e562c86c42d02f804d",
+    "eid": "49a61b5a9454bf61536b4c45",
+    "linkDocumentId": ""
+  },
+  "elementKind": "assembly",
+  "tabName": "Arch Top",
+  "assemblyName": "Arch Top",
+  "documentName": "ExoGuitar Assemblies",
+  "queriedAt": "2026-04-30T19:20:23Z",
+  "frame": "assemblyWorld",
+  "mateConnectors": {
+    "iface_neck_bottom": {
+      "onshapeFeatureName": "iface_neck_bottom",
+      "featureId": "MHnPa4Jo78rszCynq",
+      "originMeters": [
+        0.050200229175501834,
+        -0.03591921807895521,
+        -0.047
+      ],
+      "xAxis": [
+        1,
+        0,
+        0
+      ],
+      "yAxis": [
+        0,
+        -1,
+        0
+      ],
+      "zAxis": [
+        0,
+        0,
+        -1
+      ]
+    },
+    "iface_face_plate_bottom": {
+      "onshapeFeatureName": "iface_face_plate_bottom",
+      "featureId": "Mg4R5BcXGDuwzVflE",
+      "originMeters": [
+        0.050200229175501834,
+        -0.038919218078955216,
+        -0.181
+      ],
+      "xAxis": [
+        1,
+        0,
+        0
+      ],
+      "yAxis": [
+        0,
+        -1,
+        0
+      ],
+      "zAxis": [
+        0,
+        0,
+        -1
+      ]
+    },
+    "iface_bridge_bottom": {
+      "onshapeFeatureName": "iface_bridge_bottom",
+      "featureId": "M897V739b4Fuqt3XP",
+      "originMeters": [
+        -0.0072337870565579035,
+        -0.1215590961780856,
+        0.05
+      ],
+      "xAxis": [
+        1,
+        -3.7007434154171886e-16,
+        0
+      ],
+      "yAxis": [
+        0,
+        0,
+        1
+      ],
+      "zAxis": [
+        -3.7007434154171886e-16,
+        -1,
+        0
+      ]
+    }
+  }
+}

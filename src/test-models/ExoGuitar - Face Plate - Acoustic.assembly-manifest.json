@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "composedDocument": true,
+  "legacyIfaceAssembly": false,
+  "sourceFile": "src/test-models/ExoGuitar - Face Plate - Acoustic.glb",
+  "assemblyGltfGrouping": true,
+  "document": {
+    "did": "6fd3211936816a22a3e79f4f",
+    "wvm": "w",
+    "wvmid": "1dad46e562c86c42d02f804d",
+    "eid": "1db0757333138536102e3814",
+    "linkDocumentId": ""
+  },
+  "elementKind": "assembly",
+  "tabName": "Acoustic",
+  "assemblyName": "Acoustic",
+  "documentName": "ExoGuitar Assemblies",
+  "partGroupsNote": "Default: group by text before the first \" - \" in each scene child name (viewer expands Three.js _ in names). Optional partVisibilityBuckets overrides with substring rules. Re-export preserves partVisibilityBuckets if already present.",
+  "queriedAt": "2026-04-30T19:20:02Z",
+  "libraryVersion": 2945,
+  "sourceMicroversion": "e5accdda801e327408aef28d",
+  "exportContentType": "application/octet-stream;charset=utf-8",
+  "excludeHiddenEntities": true,
+  "exportMethod": "asyncPOST_assembly_export_gltf",
+  "gltfMeshQuality": "coarse",
+  "meshParams": {
+    "angularTolerance": 0.06,
+    "distanceTolerance": 0.04,
+    "maximumChordLength": 0.2,
+    "resolution": "COARSE",
+    "unit": "METER"
+  },
+  "glbWebOptimize": {
+    "applied": true,
+    "inputBytes": 5380540,
+    "outputBytes": 1141996,
+    "simplifyRatio": 0.82,
+    "simplifyError": 0.01,
+    "simplifyLockBorder": true,
+    "meshoptLevel": "medium",
+    "extensionsUsed": [
+      "EXT_meshopt_compression"
+    ]
+  }
+}

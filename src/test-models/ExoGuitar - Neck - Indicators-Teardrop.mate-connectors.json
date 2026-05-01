@@ -1,0 +1,91 @@
+{
+  "legacyIfaceAssembly": true,
+  "sourceFile": "src/test-models/ExoGuitar - Neck - Indicators-Teardrop.glb",
+  "document": {
+    "did": "6fd3211936816a22a3e79f4f",
+    "wvm": "w",
+    "wvmid": "1dad46e562c86c42d02f804d",
+    "eid": "34d33b0380d693f447b5a115",
+    "linkDocumentId": ""
+  },
+  "elementKind": "assembly",
+  "tabName": "Indicators - Teardrop",
+  "assemblyName": "Indicators - Teardrop",
+  "documentName": "ExoGuitar Assemblies",
+  "queriedAt": "2026-04-30T19:24:24Z",
+  "frame": "assemblyWorld",
+  "mateConnectors": {
+    "iface_neck_bottom": {
+      "onshapeFeatureName": "iface_neck_bottom",
+      "featureId": "Mbp6fewBLLENkhk2/",
+      "originMeters": [
+        0.050200229175501834,
+        -0.03591921807895521,
+        -0.047
+      ],
+      "xAxis": [
+        1,
+        0,
+        0
+      ],
+      "yAxis": [
+        0,
+        -1,
+        0
+      ],
+      "zAxis": [
+        0,
+        0,
+        -1
+      ]
+    },
+    "iface_face_plate_bottom": {
+      "onshapeFeatureName": "iface_face_plate_bottom",
+      "featureId": "M84QWuYiswYRv2F+F",
+      "originMeters": [
+        0.050200229175501834,
+        -0.038919218078955216,
+        -0.181
+      ],
+      "xAxis": [
+        1,
+        0,
+        0
+      ],
+      "yAxis": [
+        0,
+        -1,
+        0
+      ],
+      "zAxis": [
+        0,
+        0,
+        -1
+      ]
+    },
+    "iface_first_fret": {
+      "onshapeFeatureName": "iface_first_fret",
+      "featureId": "ME7Sj6w0t8P74wa0j",
+      "originMeters": [
+        0.050200229175501834,
+        -0.01798660807895521,
+        -0.011251999999999998
+      ],
+      "xAxis": [
+        1,
+        0,
+        0
+      ],
+      "yAxis": [
+        0,
+        -6.123233995736766e-17,
+        -1
+      ],
+      "zAxis": [
+        0,
+        1,
+        -6.123233995736766e-17
+      ]
+    }
+  }
+}

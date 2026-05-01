@@ -1,0 +1,40 @@
+export {
+  InterfaceAssemblyView,
+  type AssemblyModelInput,
+  type InterfaceAssemblyViewProps,
+  type PartCatalogFile,
+} from './InterfaceAssemblyView';
+export {
+  type AssemblyManifest,
+  PART_GROUP_NAME_SEPARATOR,
+  collectDashNamedPartGroups,
+  collectManifestPartGroups,
+  collectPartGroupsForRoot,
+  collectPartGroupsForSceneRoot,
+  groupNameFromPartNodeName,
+  labelForPartGroup,
+  listPartGroupObjects,
+  expandSanitizedNodeNameForGrouping,
+  normalizeNodeNameForPartMatching,
+  partGroupKey,
+  partGroupKeyForName,
+  stripOccurrenceOfPrefixForDisplay,
+  type PartGroupBucket,
+  type PartGroupRef,
+  type PartVisibilityBucketRule,
+} from './assemblyPartGroups';
+export {
+  alignMovingRootToFixedFrame,
+  assembleModelsByInterfaces,
+  collectInterfaceNodes,
+  injectIfaceNodesFromSidecar,
+  parseInterfaceName,
+  type InterfaceNode,
+  type MateConnectorsSidecar,
+  type PlacedModel,
+} from './interfaceFrames';
+export {
+  loadAllTestFolderModelUrls,
+  loadTestFolderModels,
+  type TestModelEntry,
+} from './loadTestFolderModels';

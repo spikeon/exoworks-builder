@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "composedDocument": true,
+  "legacyIfaceAssembly": false,
+  "sourceFile": "src/test-models/ExoGuitar - Arrow Head.glb",
+  "assemblyGltfGrouping": true,
+  "document": {
+    "did": "f8519e054e386d34fe7f717c",
+    "wvm": "w",
+    "wvmid": "4b68044692bbe5e682fcb1e9",
+    "eid": "e70192046affa55b84dfea81",
+    "linkDocumentId": ""
+  },
+  "elementKind": "assembly",
+  "tabName": "Arrow Head",
+  "assemblyName": "Arrow Head",
+  "documentName": "ExoGuitar",
+  "partGroupsNote": "Default: group by text before the first \" - \" in each scene child name (viewer expands Three.js _ in names). Optional partVisibilityBuckets overrides with substring rules. Re-export preserves partVisibilityBuckets if already present.",
+  "queriedAt": "2026-04-30T03:10:52Z",
+  "libraryVersion": 2945,
+  "sourceMicroversion": "405386a548d10b4f1bb031a3",
+  "exportContentType": "application/octet-stream;charset=utf-8",
+  "excludeHiddenEntities": true,
+  "exportMethod": "asyncPOST_assembly_export_gltf",
+  "gltfMeshQuality": "coarse",
+  "meshParams": {
+    "angularTolerance": 0.06,
+    "distanceTolerance": 0.04,
+    "maximumChordLength": 0.2,
+    "resolution": "COARSE",
+    "unit": "METER"
+  },
+  "glbWebOptimize": {
+    "applied": true,
+    "inputBytes": 8044324,
+    "outputBytes": 1653744,
+    "simplifyRatio": 0.82,
+    "simplifyError": 0.01,
+    "simplifyLockBorder": true,
+    "meshoptLevel": "medium",
+    "extensionsUsed": [
+      "EXT_meshopt_compression"
+    ]
+  }
+}

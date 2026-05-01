@@ -1,0 +1,91 @@
+{
+  "legacyIfaceAssembly": true,
+  "sourceFile": "src/test-models/ExoGuitar - Neck - Frets-Plastic.glb",
+  "document": {
+    "did": "6fd3211936816a22a3e79f4f",
+    "wvm": "w",
+    "wvmid": "1dad46e562c86c42d02f804d",
+    "eid": "b92cfa3d6370cae67b958547",
+    "linkDocumentId": ""
+  },
+  "elementKind": "assembly",
+  "tabName": "Frets - Plastic",
+  "assemblyName": "Frets - Plastic",
+  "documentName": "ExoGuitar Assemblies",
+  "queriedAt": "2026-04-30T19:21:17Z",
+  "frame": "assemblyWorld",
+  "mateConnectors": {
+    "iface_neck_bottom": {
+      "onshapeFeatureName": "iface_neck_bottom",
+      "featureId": "MOnHxHWs8sPhYUmC7",
+      "originMeters": [
+        0.050200229175501834,
+        -0.03591921807895521,
+        -0.047
+      ],
+      "xAxis": [
+        1,
+        0,
+        0
+      ],
+      "yAxis": [
+        0,
+        -1,
+        0
+      ],
+      "zAxis": [
+        0,
+        0,
+        -1
+      ]
+    },
+    "iface_face_plate_bottom": {
+      "onshapeFeatureName": "iface_face_plate_bottom",
+      "featureId": "MrUxy20h6pz0zxtc9",
+      "originMeters": [
+        0.050200229175501834,
+        -0.038919218078955216,
+        -0.181
+      ],
+      "xAxis": [
+        1,
+        0,
+        0
+      ],
+      "yAxis": [
+        0,
+        -1,
+        0
+      ],
+      "zAxis": [
+        0,
+        0,
+        -1
+      ]
+    },
+    "iface_first_fret": {
+      "onshapeFeatureName": "iface_first_fret",
+      "featureId": "M+/tzM0aiC7YG48YA",
+      "originMeters": [
+        0.050200229175501834,
+        -0.01798660807895521,
+        -0.011251999999999998
+      ],
+      "xAxis": [
+        1,
+        0,
+        0
+      ],
+      "yAxis": [
+        0,
+        -6.123233995736766e-17,
+        -1
+      ],
+      "zAxis": [
+        0,
+        1,
+        -6.123233995736766e-17
+      ]
+    }
+  }
+}

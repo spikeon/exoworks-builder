@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "composedDocument": true,
+  "legacyIfaceAssembly": false,
+  "sourceFile": "src/test-models/exoworks-builder - exobass.glb",
+  "assemblyGltfGrouping": true,
+  "document": {
+    "did": "f8368b46d4bdaac52400f0d5",
+    "wvm": "w",
+    "wvmid": "8289b01eff3921cb8867e00e",
+    "eid": "0db97ed337967336cdede820",
+    "linkDocumentId": ""
+  },
+  "elementKind": "assembly",
+  "tabName": "exobass",
+  "assemblyName": "exobass",
+  "documentName": "exoworks-builder",
+  "partGroupsNote": "Default: group by text before the first \" - \" in each scene child name (viewer expands Three.js _ in names). Optional partVisibilityBuckets overrides with substring rules. Re-export preserves partVisibilityBuckets if already present.",
+  "queriedAt": "2026-04-30T19:19:39Z",
+  "libraryVersion": 2945,
+  "sourceMicroversion": "859a24947a7c69a3b9f0a577",
+  "exportContentType": "application/octet-stream;charset=utf-8",
+  "excludeHiddenEntities": true,
+  "exportMethod": "asyncPOST_assembly_export_gltf",
+  "gltfMeshQuality": "coarse",
+  "meshParams": {
+    "angularTolerance": 0.06,
+    "distanceTolerance": 0.04,
+    "maximumChordLength": 0.2,
+    "resolution": "COARSE",
+    "unit": "METER"
+  },
+  "glbWebOptimize": {
+    "applied": true,
+    "inputBytes": 38347728,
+    "outputBytes": 8238932,
+    "simplifyRatio": 0.82,
+    "simplifyError": 0.01,
+    "simplifyLockBorder": true,
+    "meshoptLevel": "medium",
+    "extensionsUsed": [
+      "EXT_meshopt_compression"
+    ]
+  }
+}

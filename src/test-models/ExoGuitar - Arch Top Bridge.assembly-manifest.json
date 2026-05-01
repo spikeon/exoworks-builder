@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "composedDocument": true,
+  "legacyIfaceAssembly": false,
+  "sourceFile": "src/test-models/ExoGuitar - Arch Top Bridge.glb",
+  "assemblyGltfGrouping": true,
+  "document": {
+    "did": "f8519e054e386d34fe7f717c",
+    "wvm": "w",
+    "wvmid": "4b68044692bbe5e682fcb1e9",
+    "eid": "aa615db98ed62ef52fec9eb2",
+    "linkDocumentId": ""
+  },
+  "elementKind": "assembly",
+  "tabName": "Arch Top Bridge",
+  "assemblyName": "Arch Top Bridge",
+  "documentName": "ExoGuitar",
+  "partGroupsNote": "Default: group by text before the first \" - \" in each scene child name (viewer expands Three.js _ in names). Optional partVisibilityBuckets overrides with substring rules. Re-export preserves partVisibilityBuckets if already present.",
+  "queriedAt": "2026-04-28T21:51:27Z",
+  "libraryVersion": 2945,
+  "sourceMicroversion": "8667301f503a37278bb76c83",
+  "exportContentType": "application/octet-stream;charset=utf-8",
+  "excludeHiddenEntities": true,
+  "exportMethod": "asyncPOST_assembly_export_gltf",
+  "gltfMeshQuality": "coarse",
+  "meshParams": {
+    "angularTolerance": 0.06,
+    "distanceTolerance": 0.04,
+    "maximumChordLength": 0.2,
+    "resolution": "COARSE",
+    "unit": "METER"
+  },
+  "glbWebOptimize": {
+    "applied": true,
+    "inputBytes": 1382040,
+    "outputBytes": 323708,
+    "simplifyRatio": 0.82,
+    "simplifyError": 0.01,
+    "simplifyLockBorder": true,
+    "meshoptLevel": "medium",
+    "extensionsUsed": [
+      "EXT_meshopt_compression"
+    ]
+  }
+}

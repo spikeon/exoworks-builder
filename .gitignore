@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+
+# Env (copy from .env.example)
+.env
+.env.local
+.env.*.local
+
+# Logs & debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Vite
+*.local
+
+# Test / coverage
+coverage/
+
+# OS & editors
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+*.code-workspace
+
+# Onshape pull outputs (regenerate with npm run onshape:pull*)
+src/test-models/**/*.glb
+src/test-models/**/*.gltf
+
+# Local scratch
+tmp/
+temp/
