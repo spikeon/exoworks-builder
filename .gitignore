@@ -37,3 +37,5 @@ src/test-models/**/*.gltf
 # Local scratch
 tmp/
 temp/
+
+graphify-out/cache
